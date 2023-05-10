@@ -23,6 +23,24 @@ test('The stack should be empty in the beginning', async () => {
 	expect(stack).toEqual("n/a");
 });
 
+//New test
+test('Add an item to the stack', async() => {
+  
+	// Klicka "Pusha til stacken" knappen för att aktivera alerten.
+	await driver.findElement(By.id('push')).click();
+  
+	// Byta till alert page och skriver in Coconut i boxen som value
+	const alert = await driver.switchTo().alert();
+	await alert.sendKeys('Coconut');
+	await alert.accept();
+  
+	// Hämta den nya uppdaterade texten som gick in i stacken
+	const updatedStackItem = await driver.findElement(By.id('top_of_stack')).getText();
+  
+	// Kollar så att texten som lades in i stacken stämmer med toEqual().
+	expect(updatedStackItem).toEqual('Coconut');
+});
+
 describe('Clicking "Pusha till stacken"', () => {
 	it('should open a prompt box', async () => {
 		let push = await driver.findElement(By.id('push'));
